@@ -19,7 +19,7 @@ setting up ships on their individual sides of the game board. Once both sides ar
 
 
 ## Screenshots
-![Example screenshot](./edosian.jpeg)
+![Example screenshot](./edosian.jpg)
 
 ## Technologies
 * To be decided
