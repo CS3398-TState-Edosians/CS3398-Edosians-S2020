@@ -16,10 +16,16 @@ public class Controller implements Initializable {
     LinkedList<ChatEntry> chatTranscript = new LinkedList<ChatEntry>();
 
     @FXML
-    private TextArea chatLog;
+    private TextArea Board1;
 
     @FXML
-    private TextField chatEntry;
+    private TextArea Board2;
+
+    @FXML
+    private TextField attackRow;
+
+    @FXML
+    private TextField attackColumn;
 
     @FXML
     private TextField entryAuthor;
@@ -33,16 +39,16 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         entryAuthor.textProperty().bindBidirectional(currentAttackEvent.attackPlayerProperty());
-        chatEntry.textProperty().bindBidirectional(currentAttackEvent.attackTextProperty());
+        //chatEntry.textProperty().bindBidirectional(currentAttackEvent.attackTextProperty());
         refreshGameBoard();
     }
 
     @FXML
     private void postButtonClicked(ActionEvent event) {
-        if((chatEntry.getLength() > 3)&&(entryAuthor.getLength() > 1)){
+        if((attackColumn.getLength() >= 1)&&(attackRow.getLength() >= 1)&&(entryAuthor.getLength() >= 1)){
             ChatEntry t = new ChatEntry();
             t.setEntryAuthor(entryAuthor.getText());
-            t.setEntryText(chatEntry.getText());
+            //t.setEntryText(chatEntry.getText());
             chatTranscript.add(t);
             refreshGameBoard();
         }
@@ -67,7 +73,8 @@ public class Controller implements Initializable {
         alert.getButtonTypes().add(1, ButtonType.NO);
         Optional<ButtonType> confirmationResponse = alert.showAndWait();
         if(confirmationResponse.get() == ButtonType.YES) {
-            chatEntry.clear();
+            attackColumn.clear();
+            attackRow.clear();
         }
     }
 
@@ -77,9 +84,13 @@ public class Controller implements Initializable {
 
     void refreshGameBoard()
     {
-        chatLog.clear();
+        Board1.clear();
+        Board2.clear();
         chatTranscript.forEach((test) -> {
-            chatLog.appendText(test.getEntryAuthor() +": " + test.getEntryText() + "\n");
+            Board1.appendText(test.getEntryAuthor() +": " + test.getEntryText() + "\n");
+        });
+        chatTranscript.forEach((test) -> {
+            Board2.appendText(test.getEntryAuthor() +": " + test.getEntryText() + "\n");
         });
 
     }

@@ -17,21 +17,32 @@
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="595.0" minWidth="2.0" prefWidth="6.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="359.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="340.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <TextArea fx:id="chatLog" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <TextField fx:id="entryAuthor" alignment="TOP_CENTER" promptText="[Player Name Here]" GridPane.columnIndex="1" />
+        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <children>
-                <TextField fx:id="chatEntry" alignment="TOP_LEFT" prefHeight="60.0" prefWidth="476.0" promptText="Enter Move Here">
+                <TextArea fx:id="Board1" editable="false" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextArea fx:id="Board2" editable="false" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            </children>
+        </HBox>
+        <HBox prefHeight="100.0" alignment="TOP_CENTER" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <children>
+                <TextField fx:id="attackColumn" alignment="CENTER" prefWidth="75.0" promptText="[Column]">
+                <padding>
+                    <Insets left="2.0" />
+                </padding>
+                </TextField>
+                <TextField fx:id="attackRow" alignment="CENTER" prefWidth="75.0" promptText="[Row]">
                     <padding>
                         <Insets left="2.0" />
                     </padding></TextField>
                 <VBox prefHeight="200.0" prefWidth="100.0" spacing="4.0">
                     <children>
-                        <Button fx:id="postButton" mnemonicParsing="false" onAction="#postButtonClicked" prefHeight="27.0" prefWidth="104.0" text="Post" />
+                        <Button fx:id="postButton" mnemonicParsing="false" onAction="#postButtonClicked" prefHeight="27.0" prefWidth="104.0" text="Fire" />
                         <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="27.0" prefWidth="119.0" text="Cancel" />
                     </children>
                     <HBox.margin>
@@ -46,7 +57,7 @@
                 <Insets bottom="10.0" top="10.0" />
             </padding>
         </HBox>
-        <TextField fx:id="entryAuthor" alignment="CENTER" promptText="[Player Name Here]" GridPane.columnIndex="1" />
+
     </children>
     <padding>
         <Insets left="5.0" />
