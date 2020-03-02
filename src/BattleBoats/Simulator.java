@@ -1,12 +1,14 @@
 package BattleBoats;
-
+// Potentially for fake player currently configured for the Game Of Life so it will need to be reprogrammed to randomly
+// select a board cell and fire without using one it has already taken. To start with then you can enrich with an algorithm
+// to check in logical vertical and horizontal placement of a boat
 
 import java.util.ArrayList;
 
 public class Simulator extends Thread {
 
     private Board gameBoard = null;
-    private ArrayList<Soul> souls = null;
+    private ArrayList<Cell> Cells = null;
     private int maxGenerations = 2;
     private int threadsFinishedNextValueCalculation = 0;
     private int threadsFinishedNextValueSet = 0;
@@ -21,21 +23,21 @@ public class Simulator extends Thread {
     }
 
     public final void runSimulation() {
-        setSoulsSimulator();
+        setCellsSimulator();
         startCellThreads();
         computeGenerations();
     }
 
-    private void setSoulsSimulator() {
-        souls = (ArrayList<Soul>) gameBoard.getSouls();
-        for (Soul soul : souls) {
-            soul.setSimulator(this);
+    private void setCellsSimulator() {
+        Cells = (ArrayList<Cell>) gameBoard.getCells();
+        for (Cell Cell : Cells) {
+            Cell.setSimulator(this);
         }
     }
 
     private void startCellThreads() {
-        for (Soul soul : souls) {
-            soul.start();
+        for (Cell Cell : Cells) {
+            Cell.start();
         }
     }
 
@@ -73,8 +75,8 @@ public class Simulator extends Thread {
     }
 
     private void wakeUpCellThreads() {
-        for (Soul soul : souls) {
-            soul.continueGame();
+        for (Cell Cell : Cells) {
+            Cell.continueGame();
         }
     }
 
@@ -84,15 +86,15 @@ public class Simulator extends Thread {
     }
 
     private void stopThreads() {
-        for (Soul soul : souls) {
-            soul.stopGame();
+        for (Cell Cell : Cells) {
+            Cell.stopGame();
         }
     }
 
     public final synchronized void threadFinishedNextValueCalculation() {
         threadsFinishedNextValueCalculation++;
 
-        if (threadsFinishedNextValueCalculation == souls.size()) {
+        if (threadsFinishedNextValueCalculation == Cells.size()) {
             threadsFinishedNextValueCalculation = 0;
             notify();
         }
@@ -100,7 +102,7 @@ public class Simulator extends Thread {
 
     public final synchronized void threadFinishedNextValueSet() {
         threadsFinishedNextValueSet++;
-        if (threadsFinishedNextValueSet == souls.size()) {
+        if (threadsFinishedNextValueSet == Cells.size()) {
             threadsFinishedNextValueSet = 0;
             notify();
         }

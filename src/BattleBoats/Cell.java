@@ -1,6 +1,6 @@
 package BattleBoats;
 
-public class Soul extends Thread {
+public class Cell extends Thread {
     private int value = 0;
     private int row = 0;
     private int column = 0;
@@ -8,8 +8,8 @@ public class Soul extends Thread {
     private Board board = null;
     private Simulator simulator = null;
 
-    public Soul(final Board board, final int row, final int column, final int value) {
-        super("Soul Thread");
+    public Cell(final Board board, final int row, final int column, final int value) {
+        super("Cell Thread");
         this.board = board;
         this.row = row;
         this.column = column;
@@ -90,7 +90,7 @@ public class Soul extends Thread {
         int amount = 0;
         for (int i = row - 1; i <= row + 1; i++) {
             for (int j = column - 1; j <= column + 1; j++) {
-                Soul neighbor = board.getSoulAtPosition(i, j);
+                Cell neighbor = board.getCellAtPosition(i, j);
 
                 if (neighbor == this) {
                     continue; // Do not count this.

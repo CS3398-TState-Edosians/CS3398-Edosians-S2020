@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 
 
 public class Controller implements Initializable {
-    ChatEntry currentChatEntry = new ChatEntry();
+    AttackEvent currentAttackEvent = new AttackEvent();
     LinkedList<ChatEntry> chatTranscript = new LinkedList<ChatEntry>();
 
     @FXML
@@ -32,9 +32,9 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        entryAuthor.textProperty().bindBidirectional(currentChatEntry.entryAuthorProperty());
-        chatEntry.textProperty().bindBidirectional(currentChatEntry.entryTextProperty());
-        refreshChatTranscript();
+        entryAuthor.textProperty().bindBidirectional(currentAttackEvent.attackPlayerProperty());
+        chatEntry.textProperty().bindBidirectional(currentAttackEvent.attackTextProperty());
+        refreshGameBoard();
     }
 
     @FXML
@@ -44,7 +44,7 @@ public class Controller implements Initializable {
             t.setEntryAuthor(entryAuthor.getText());
             t.setEntryText(chatEntry.getText());
             chatTranscript.add(t);
-            refreshChatTranscript();
+            refreshGameBoard();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -75,7 +75,7 @@ public class Controller implements Initializable {
         this.chatTranscript = parentChatTranscript;
     }
 
-    void refreshChatTranscript()
+    void refreshGameBoard()
     {
         chatLog.clear();
         chatTranscript.forEach((test) -> {

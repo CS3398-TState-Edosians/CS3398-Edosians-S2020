@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Board {
 
-    private Soul[][] map; // rows, columns
-    private int columns = 0;
+    private Cell[][] map; // rows, columns
+    private int columns = 0;   // 10x10 is Standard Battleship Size
     private int rows = 0;
 
     public Board(final int rows, final int columns) {
@@ -21,17 +21,17 @@ public class Board {
             for (int j = 0; j < columns; j++) {
                 char character = stringRows.get(i).charAt(j);
                 int value = Integer.valueOf(String.valueOf(character));
-                map[i][j] = new Soul(this, i + 1, j + 1, value);
+                map[i][j] = new Cell(this, i + 1, j + 1, value);
             }
         }
     }
 
     public void initializeBoard() {
-        map = new Soul[rows][columns];
+        map = new Cell[rows][columns];
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                map[i][j] = new Soul(this, i + 1, j + 1, 0);
+                map[i][j] = new Cell(this, i + 1, j + 1, 0);  // No Obstructions Set to All Zero
             }
         }
     }
@@ -49,7 +49,7 @@ public class Board {
         }
     }
 
-    public final Soul getSoulAtPosition(final int row, final int column) {
+    public final Cell getCellAtPosition(final int row, final int column) {
         if (row > rows || row < 1) {
             return null;
         }
@@ -58,20 +58,20 @@ public class Board {
             return null;
         }
 
-        Soul soul = map[row - 1][column - 1];
-        return soul;
+        Cell Cell = map[row - 1][column - 1];
+        return Cell;
     }
 
-    public final List<Soul> getSouls() {
-        ArrayList<Soul> souls = new ArrayList<>();
+    public final List<Cell> getCells() {
+        ArrayList<Cell> Cells = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                souls.add(map[i][j]);
+                Cells.add(map[i][j]);
             }
         }
 
-        return souls;
+        return Cells;
     }
 
 }
