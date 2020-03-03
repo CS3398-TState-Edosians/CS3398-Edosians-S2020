@@ -52,6 +52,10 @@ To-do list:
 
 ## Status
 Project is in progress.
+As of sprint 1, we have a working demo that allows for one player gameplay.
+
+Team members status
+Aldo - Finished the boats game board pieces. Next step is to add the pieces to the game.
 
 ## Inspiration
 Project inspired by Battleship. This is our semester project for Software Engineering Spring 2020.
