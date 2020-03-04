@@ -107,7 +107,7 @@ public class BattleboatsMain extends Application {
         Scene scene = new Scene(createContent());
         primaryStage.setTitle("Battleship");
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 

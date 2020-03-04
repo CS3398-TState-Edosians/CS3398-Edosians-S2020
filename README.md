@@ -60,6 +60,8 @@ Aldo - Finished the boats game board pieces. Next step is to add the pieces to t
 Marcos - Implemented queue system with checkpoints. Next step involves planning and and making a
 working queue for players to queue into and a better player class.
 
+Richard - Created initial build project with board creation and threading
+
 ## Inspiration
 Project inspired by Battleship. This is our semester project for Software Engineering Spring 2020.
 
