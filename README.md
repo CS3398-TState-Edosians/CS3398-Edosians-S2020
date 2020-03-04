@@ -56,6 +56,7 @@ As of sprint 1, we have a working demo that allows for one player gameplay.
 
 Team members status
 Aldo - Finished the boats game board pieces. Next step is to add the pieces to the game.
+
 Marcos - Implemented queue system with checkpoints. Next step involves planning and and making a
 working queue for players to queue into and a better player class.
 
