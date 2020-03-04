@@ -1,4 +1,3 @@
-package battleboats;
 
 import java.util.Random;
 
@@ -9,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -25,9 +25,9 @@ public class BattleboatsMain extends Application {
 
     private Parent createContent() {
         BorderPane root = new BorderPane();
-        root.setPrefSize(600, 800);
+        root.setPrefSize(311, 100);
 
-        root.setRight(new Text("RIGHT SIDEBAR - CONTROLS"));
+        //root.setRight(new Text("RIGHT SIDEBAR - CONTROLS"));
 
         enemyBoard = new Board(true, event -> {
             if (!running)
@@ -60,8 +60,8 @@ public class BattleboatsMain extends Application {
             }
         });
 
-        VBox vbox = new VBox(50, enemyBoard, playerBoard);
-        vbox.setAlignment(Pos.CENTER);
+        VBox vbox = new VBox(40, enemyBoard, playerBoard);
+        vbox.setAlignment(Pos.TOP_LEFT);
 
         root.setCenter(vbox);
 
@@ -107,7 +107,7 @@ public class BattleboatsMain extends Application {
         Scene scene = new Scene(createContent());
         primaryStage.setTitle("Battleship");
         primaryStage.setScene(scene);
-        primaryStage.setResizable(true);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
