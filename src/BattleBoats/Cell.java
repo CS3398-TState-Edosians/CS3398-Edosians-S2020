@@ -1,5 +1,7 @@
 package BattleBoats;
 
+import javafx.scene.paint.Color;
+
 public class Cell extends Thread {
     private int value = 0;
     private int row = 0;
@@ -8,12 +10,32 @@ public class Cell extends Thread {
     private Board board = null;
     private Simulator simulator = null;
 
+    public Boat boat = null;
+    public boolean wasShot = false;
+
     public Cell(final Board board, final int row, final int column, final int value) {
         super("Cell Thread");
         this.board = board;
         this.row = row;
         this.column = column;
         this.value = value;
+    }
+
+    public boolean shoot() {
+        wasShot = true;
+        setFill(Color.BLACK);
+
+        if (ship != null) {
+            ship.hit();
+            setFill(Color.RED);
+            if (!ship.isAlive()) {
+                board.ships--;
+                board.shipDestroyed();
+            }
+            return true;
+        }
+
+        return false;
     }
 
     public final void setSimulator(Simulator simulator) {
