@@ -1,12 +1,10 @@
-package BattleBoats;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
 
-public class Server {
+public class MyServer {
     public static void main(String[] args) {
         connectToServer();
     }
