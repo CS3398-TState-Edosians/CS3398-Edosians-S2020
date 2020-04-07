@@ -13,6 +13,6 @@
             <Button layoutX="19.0" layoutY="225.0" mnemonicParsing="false" onMouseClicked="#ExitBtn" prefHeight="30.0" prefWidth="200.0" text="Exit" />
          </children>
       </AnchorPane>
-      <Label fx:id="msgLabel" layoutX="192.0" layoutY="23.0" prefHeight="40.0" prefWidth="200.0" text="BattleBoats" />
+      <Label fx:id="msgLabel" alignment="CENTER" layoutX="192.0" layoutY="23.0" prefHeight="40.0" prefWidth="200.0" text="BattleBoats" />
    </children>
 </AnchorPane>

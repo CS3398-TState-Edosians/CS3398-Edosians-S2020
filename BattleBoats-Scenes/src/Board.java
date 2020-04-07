@@ -1,7 +1,5 @@
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
@@ -9,15 +7,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+
 
 public class Board extends Parent {
+
     private VBox rows = new VBox();
     private boolean enemy = false;
     public int ships = 5;
 
+    /*Constructor*/
     public Board(boolean enemy, EventHandler<? super MouseEvent> handler) {
         this.enemy = enemy;
+
         for (int y = 0; y < 10; y++) {
             HBox row = new HBox();
             for (int x = 0; x < 10; x++) {
@@ -32,6 +33,7 @@ public class Board extends Parent {
         getChildren().add(rows);
     }
 
+    /*placeShip*/
     public boolean placeShip(Ship ship, int x, int y) {
         if (canPlaceShip(ship, x, y)) {
             int length = ship.type;
@@ -63,10 +65,12 @@ public class Board extends Parent {
         return false;
     }
 
+    /*getCell*/
     public Cell getCell(int x, int y) {
         return (Cell)((HBox)rows.getChildren().get(y)).getChildren().get(x);
     }
 
+    /*getNeighbors*/
     private Cell[] getNeighbors(int x, int y) {
         Point2D[] points = new Point2D[] {
                 new Point2D(x - 1, y),
@@ -86,6 +90,7 @@ public class Board extends Parent {
         return neighbors.toArray(new Cell[0]);
     }
 
+    /*canPlaceShip*/
     private boolean canPlaceShip(Ship ship, int x, int y) {
         int length = ship.type;
 
@@ -129,44 +134,15 @@ public class Board extends Parent {
         return true;
     }
 
+    /*isValidPoint*/
     private boolean isValidPoint(Point2D point) {
         return isValidPoint(point.getX(), point.getY());
     }
 
+    /*isValidPoint*/
     private boolean isValidPoint(double x, double y) {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
-    public class Cell extends Rectangle {
-        public int x, y;
-        public Ship ship = null;
-        public boolean wasShot = false;
 
-        private Board board;
-
-        public Cell(int x, int y, Board board) {
-            super(30, 30);
-            this.x = x;
-            this.y = y;
-            this.board = board;
-            setFill(Color.LIGHTGRAY);
-            setStroke(Color.BLACK);
-        }
-
-        public boolean shoot() {
-            wasShot = true;
-            setFill(Color.BLACK);
-
-            if (ship != null) {
-                ship.hit();
-                setFill(Color.RED);
-                if (!ship.isAlive()) {
-                    board.ships--;
-                }
-                return true;
-            }
-
-            return false;
-        }
-    }
 }

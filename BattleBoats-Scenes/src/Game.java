@@ -14,7 +14,7 @@ public class Game {
     private boolean enemyTurn = false;
     private Random random = new Random();
 
-
+    /*createContent*/
     public Parent createContent() {
         BorderPane root = new BorderPane();
         root.setPrefSize(311, 100);
@@ -23,7 +23,7 @@ public class Game {
             if (!running)
                 return;
 
-            Board.Cell cell = (Board.Cell) event.getSource();
+            Cell cell = (Cell) event.getSource();
             if (cell.wasShot)
                 return;
 
@@ -36,34 +36,34 @@ public class Game {
 
             if (enemyTurn)
                 enemyMove();
-        });
 
+        });
 
         playerBoard = new Board(false, event -> {
             if (running)
                 return;
 
-            Board.Cell cell = (Board.Cell) event.getSource();
+            Cell cell = (Cell) event.getSource();
             if (playerBoard.placeShip(new Ship(shipsToPlace, event.getButton() == MouseButton.PRIMARY), cell.x, cell.y)) {
                 if (--shipsToPlace == 0) {
                     startGame();
                 }
             }
+
         });
 
         VBox vbox = new VBox(40, enemyBoard, playerBoard);
         vbox.setAlignment(Pos.TOP_LEFT);
-
         root.setCenter(vbox);
 
         return root;
     }
 
-
+    /*startGame*/
     private void startGame() {
-        // place enemy ships
         int type = 5;
 
+        // place enemy ships
         while (type > 0) {
             int x = random.nextInt(10);
             int y = random.nextInt(10);
@@ -76,13 +76,13 @@ public class Game {
         running = true;
     }
 
-
+    /*enemyMove*/
     private void enemyMove() {
         while (enemyTurn) {
             int x = random.nextInt(10);
             int y = random.nextInt(10);
 
-            Board.Cell cell = playerBoard.getCell(x, y);
+            Cell cell = playerBoard.getCell(x, y);
             if (cell.wasShot)
                 continue;
 
@@ -93,6 +93,7 @@ public class Game {
                 System.exit(0);
             }
         }
+
     }
 
 

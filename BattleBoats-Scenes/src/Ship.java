@@ -1,13 +1,13 @@
-
-
 import javafx.scene.Parent;
 
+
 public class Ship extends Parent {
+
     public int type;
     public boolean vertical = true;
-
     private int health;
 
+    /*Constructor*/
     public Ship(int type, boolean vertical) {
         this.type = type;
         this.vertical = vertical;
@@ -24,11 +24,13 @@ public class Ship extends Parent {
         getChildren().add(vbox);*/
     }
 
+    /*isAlive*/
     public void hit() {
         health--;
     }
 
-    public boolean isAlive() {
-        return health > 0;
-    }
+    /*isAlive*/
+    public boolean isAlive() { return health > 0; }
+
+
 }

@@ -11,26 +11,35 @@ import java.io.IOException;
 
 public class LoginController {
 
-    public TextField username = null;
+    public TextField username;
     public static String userStr;
+
+    /*onPlayEvent*/
     public void onPlayEvent(MouseEvent mouseEvent) throws IOException {
+        userStr = username.getCharacters().toString();
 
-         userStr = username.getCharacters().toString();
-
-        if(!userStr.isEmpty()) {
-
+        if(userStr.isEmpty()) {
+            /*TODO*/
+        }
+        else{
             //load menu page
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("Scenes/Menu.fxml"));
-            Parent loginRoot = loader.load();
+            Parent MenuRoot = loader.load();
+
+            //set welcome message
             MenuController cn = loader.getController();
             cn.msgLabel.setText("welcome "+ userStr);
-            Scene MenuPage = new Scene(loginRoot, 600, 400);
 
             //get current Stage
             Stage window = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+
             //set the menu page
+            Scene MenuPage = new Scene(MenuRoot, 600, 400);
             window.setScene(MenuPage);
         }
+
     }
+
+
 }
