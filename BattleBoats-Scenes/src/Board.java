@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.EventHandler;
@@ -7,10 +8,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
+import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.io.FileInputStream;
+import java.io.File;
 
 public class Board extends Parent {
 
+    private Pane pane = new Pane();
     private VBox rows = new VBox();
     private boolean enemy = false;
     public int ships = 5;
@@ -29,8 +35,8 @@ public class Board extends Parent {
 
             rows.getChildren().add(row);
         }
-
-        getChildren().add(rows);
+        getChildren().add(pane);
+        pane.getChildren().add(rows);
     }
 
     /*placeShip*/
@@ -47,6 +53,24 @@ public class Board extends Parent {
                         cell.setStroke(Color.GREEN);
                     }
                 }
+                if (!enemy) {
+                    Cell cell = getCell(x, y);
+                    final ImageView imageView = new ImageView();
+                    Image boatImg = null;
+                    try {
+                        File file = new File("src/Assets/"+ship.name);
+                        boatImg = new Image(new FileInputStream(file));
+                    } catch (FileNotFoundException e) {
+
+                    }
+                    imageView.setY(31*((double)y+cell.ship.type/2.0)-15);
+                    imageView.setX(31*((double)x-cell.ship.type/2.0)+15);
+                    imageView.setImage(boatImg);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30*cell.ship.type);
+                    imageView.setRotate(90);
+                    pane.getChildren().add(imageView);
+                }
             }
             else {
                 for (int i = x; i < x + length; i++) {
@@ -56,6 +80,23 @@ public class Board extends Parent {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
                     }
+                }
+                if (!enemy){
+                    Cell cell = getCell(x, y);
+                    final ImageView imageView = new ImageView();
+                    Image boatImg = null;
+                    try {
+                        File file = new File("src/Assets/"+ship.name);
+                        boatImg = new Image(new FileInputStream(file));
+                    } catch (FileNotFoundException e) {
+
+                    }
+                    imageView.setImage(boatImg);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30*cell.ship.type);
+                    imageView.setY(31*y);
+                    imageView.setX(31*x);
+                    pane.getChildren().add(imageView);
                 }
             }
 
