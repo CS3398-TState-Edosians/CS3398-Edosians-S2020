@@ -25,9 +25,9 @@ public class Board extends Parent {
     public Board(boolean enemy, EventHandler<? super MouseEvent> handler) {
         this.enemy = enemy;
 
-        for (int y = 0; y < 10; y++) {
+        for (int y = 0; y < 12; y++) {
             HBox row = new HBox();
-            for (int x = 0; x < 10; x++) {
+            for (int x = 0; x < 12; x++) {
                 Cell c = new Cell(x, y, this);
                 c.setOnMouseClicked(handler);
                 row.getChildren().add(c);
@@ -182,7 +182,7 @@ public class Board extends Parent {
 
     /*isValidPoint*/
     private boolean isValidPoint(double x, double y) {
-        return x >= 0 && x < 10 && y >= 0 && y < 10;
+        return x >= 0 && x < 12 && y >= 0 && y < 12;
     }
 
 
