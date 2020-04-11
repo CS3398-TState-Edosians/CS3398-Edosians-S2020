@@ -17,6 +17,7 @@ public class Cell extends Rectangle {
         this.board = board;
         setFill(Color.LIGHTGRAY);
         setStroke(Color.BLACK);
+        setStrokeWidth(1);
     }
 
     /*shoot*/

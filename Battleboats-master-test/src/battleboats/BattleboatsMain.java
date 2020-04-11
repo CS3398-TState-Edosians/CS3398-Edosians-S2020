@@ -70,8 +70,8 @@ public class BattleboatsMain extends Application {
 
     private void enemyMove() {
         while (enemyTurn) {
-            int x = random.nextInt(10);
-            int y = random.nextInt(10);
+            int x = random.nextInt(12);
+            int y = random.nextInt(12);
 
             Board.Cell cell = playerBoard.getCell(x, y);
             if (cell.wasShot)
@@ -91,8 +91,8 @@ public class BattleboatsMain extends Application {
         int type = 5;
 
         while (type > 0) {
-            int x = random.nextInt(10);
-            int y = random.nextInt(10);
+            int x = random.nextInt(12);
+            int y = random.nextInt(12);
 
             if (enemyBoard.placeShip(new Ship(type, Math.random() < 0.5), x, y)) {
                 type--;

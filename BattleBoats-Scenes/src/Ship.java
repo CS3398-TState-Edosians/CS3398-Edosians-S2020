@@ -2,7 +2,7 @@ import javafx.scene.Parent;
 
 
 public class Ship extends Parent {
-
+    public String name;
     public int type;
     public boolean vertical = true;
     private int health;
@@ -12,6 +12,23 @@ public class Ship extends Parent {
         this.type = type;
         this.vertical = vertical;
         health = type;
+
+        switch (type){
+            case 5:
+                this.name = "aircraft_carrier.png";
+                break;
+            case 4:
+                this.name = "battleship.png";
+                break;
+            case 3:
+                this.name = "destroyer.png";
+                break;
+            case 2:
+                this.name = "submarine.png";
+                break;
+            default:
+                this.name = "";
+        }
 
         /*VBox vbox = new VBox();
         for (int i = 0; i < type; i++) {
