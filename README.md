@@ -61,6 +61,8 @@ Marcos - Implemented queue system with checkpoints. Next step involves planning 
 working queue for players to queue into and a better player class.
 
 Richard - Created initial build project with board creation and threading
+![Example screenshot](./Sp1-Retro.png)
+![Example screenshot](./Sp12-Retro.png)
 
 ## Inspiration
 Project inspired by Battleship. This is our semester project for Software Engineering Spring 2020.
