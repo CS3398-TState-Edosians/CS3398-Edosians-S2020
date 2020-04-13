@@ -39,9 +39,27 @@ public class Cell extends Rectangle {
         wasShot = true;
         setFill(Color.BLACK);
 
+        Image missOcean = null;
+        try {
+            File file = new File("src/Assets/MissOcean.png");
+            missOcean = new Image(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+
+        }
+        setFill(new ImagePattern(missOcean));
+
         if (ship != null) {
             ship.hit();
-            setFill(Color.RED);
+
+            Image hitImage = null;
+            try {
+                File file = new File("src/Assets/Hit.png");
+                hitImage = new Image(new FileInputStream(file));
+            } catch (FileNotFoundException e) {
+
+            }
+            setFill(new ImagePattern(hitImage));
+
             if (!ship.isAlive()) {
                 board.ships--;
             }
