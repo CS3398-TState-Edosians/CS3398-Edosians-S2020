@@ -59,9 +59,15 @@ Aldo - Finished the boats game board pieces. Next step is to add the pieces to t
 
 Marcos - Implemented queue system with checkpoints. Next step involves planning and and making a
 working queue for players to queue into and a better player class.
-
 Richard - Created initial build project with board creation and threading
+=======================================================================================================================
+SPRINT 1 - Single Player POC Game
+
 ![Example screenshot](./SP1-Retro.png)
+
+=======================================================================================================================
+SPRINT 2 - Images and Completion of JavaFX Game Client
+
 ![Example screenshot](./SP2-Retro.png)
 
 ## Inspiration
