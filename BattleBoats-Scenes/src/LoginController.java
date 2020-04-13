@@ -5,9 +5,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import java.io.File;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.fxml.FXML;
 
 import java.io.IOException;
-
 
 public class LoginController {
 
