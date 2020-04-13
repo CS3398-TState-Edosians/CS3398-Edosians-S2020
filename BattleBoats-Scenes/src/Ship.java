@@ -5,12 +5,14 @@ public class Ship extends Parent {
     public String name;
     public int type;
     public boolean vertical = true;
+    public boolean isEnemy;
     private int health;
 
     /*Constructor*/
-    public Ship(int type, boolean vertical) {
+    public Ship(int type, boolean vertical, boolean isEnemy) {
         this.type = type;
         this.vertical = vertical;
+        this.isEnemy= isEnemy;
         health = type;
 
         switch (type){
