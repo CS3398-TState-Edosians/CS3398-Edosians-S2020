@@ -1,5 +1,11 @@
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class Cell extends Rectangle {
 
@@ -15,7 +21,15 @@ public class Cell extends Rectangle {
         this.x = x;
         this.y = y;
         this.board = board;
-        setFill(Color.LIGHTGRAY);
+        Image oceanImage = null;
+        try {
+            File file = new File("src/Assets/ClearOcean.png");
+            oceanImage = new Image(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+
+        }
+        setFill(new ImagePattern(oceanImage));
+        //setFill(Color.LIGHTGRAY);
         setStroke(Color.BLACK);
         setStrokeWidth(1);
     }
