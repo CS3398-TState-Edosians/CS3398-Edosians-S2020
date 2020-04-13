@@ -54,7 +54,7 @@ public class Game {
 
             Cell cell = (Cell) event.getSource();
             if (playerBoard.placeShip(new Ship(shipsToPlace, event.getButton() == MouseButton.PRIMARY, false), cell.x, cell.y)) {
-                if (--shipsToPlace == 0) {
+                if (--shipsToPlace == 1) {
                     startGame();
                 }
             }

@@ -12,6 +12,7 @@ public class Cell extends Rectangle {
     public int x, y;
     public Ship ship = null;
     public boolean wasShot = false;
+    public boolean isObstructed = false;
 
     private Board board;
 
@@ -21,17 +22,36 @@ public class Cell extends Rectangle {
         this.x = x;
         this.y = y;
         this.board = board;
-        Image oceanImage = null;
-        try {
-            File file = new File("src/Assets/ClearOcean.png");
-            oceanImage = new Image(new FileInputStream(file));
-        } catch (FileNotFoundException e) {
 
+        this.isObstructed = getRandomBoolean(2);
+
+        if (this.isObstructed == false) {
+            Image oceanImage = null;
+            try {
+                File file = new File("src/Assets/ClearOcean.png");
+                oceanImage = new Image(new FileInputStream(file));
+            } catch (FileNotFoundException e) {
+
+            }
+            setFill(new ImagePattern(oceanImage));
         }
-        setFill(new ImagePattern(oceanImage));
-        //setFill(Color.LIGHTGRAY);
+        else {
+            Image obstructionImage = null;
+            try {
+                File file = new File("src/Assets/Obstruction.png");
+                obstructionImage = new Image(new FileInputStream(file));
+            } catch (FileNotFoundException e) {
+
+            }
+            setFill(new ImagePattern(obstructionImage));
+        }
         setStroke(Color.BLACK);
         setStrokeWidth(1);
+    }
+
+    static boolean getRandomBoolean(double probability) {
+        double randomValue = Math.random()*100;  //0.0 to 99.9
+        return randomValue <= probability;
     }
 
     /*shoot*/

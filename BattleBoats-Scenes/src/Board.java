@@ -19,7 +19,7 @@ public class Board extends Parent {
     private Pane pane = new Pane();
     private VBox rows = new VBox();
     private boolean enemy = false;
-    public int ships = 5;
+    public int ships = 4;
 
     /*Constructor*/
     public Board(boolean enemy, EventHandler<? super MouseEvent> handler) {
@@ -141,14 +141,14 @@ public class Board extends Parent {
                     return false;
 
                 Cell cell = getCell(x, i);
-                if (cell.ship != null)
+                if ((cell.ship != null) && (cell.isObstructed == true))
                     return false;
 
                 for (Cell neighbor : getNeighbors(x, i)) {
                     if (!isValidPoint(x, i))
                         return false;
 
-                    if (neighbor.ship != null)
+                    if ((neighbor.ship != null) && (neighbor.isObstructed == true))
                         return false;
                 }
             }
@@ -159,14 +159,14 @@ public class Board extends Parent {
                     return false;
 
                 Cell cell = getCell(i, y);
-                if (cell.ship != null)
+                if ((cell.ship != null) && (cell.isObstructed == true))
                     return false;
 
                 for (Cell neighbor : getNeighbors(i, y)) {
                     if (!isValidPoint(i, y))
                         return false;
 
-                    if (neighbor.ship != null)
+                    if ((neighbor.ship != null) && (neighbor.isObstructed == true))
                         return false;
                 }
             }
