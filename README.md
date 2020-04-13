@@ -56,16 +56,16 @@ As of sprint 1, we have a working demo that allows for one player gameplay.
 
 Team members status
 Aldo - Finished the boats game board pieces. Next step is to add the pieces to the game.
-
 Marcos - Implemented queue system with checkpoints. Next step involves planning and and making a
 working queue for players to queue into and a better player class.
-Richard - Created initial build project with board creation and threading
-=======================================================================================================================
+Richard - created the initial shell project with client server and multiple screens
+
+-----------------------------------------------------------------------
 SPRINT 1 - Single Player POC Game
 
 ![Example screenshot](./SP1-Retro.png)
 
-=======================================================================================================================
+-----------------------------------------------------------------------
 SPRINT 2 - Images and Completion of JavaFX Game Client
 
 ![Example screenshot](./SP2-Retro.png)
