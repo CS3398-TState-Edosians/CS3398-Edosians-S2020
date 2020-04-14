@@ -62,6 +62,7 @@ Richard - created the initial shell project with client server and multiple scre
 
 As of sprint 2 Review and Retrospective:
 Team Members status:
+
 Marcos - Worked on The  fxml Scenes LoginPage, Menu, and QueuePage, and their controllers.
 The artifacts are used for navigation of the game from one interface to another 
 and are currently located in the dev branch BattleBoats-Scenes/src folder for controllers,
