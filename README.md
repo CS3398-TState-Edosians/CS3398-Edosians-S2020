@@ -66,7 +66,8 @@ Team Members status:
 Marcos - Worked on The  fxml Scenes LoginPage, Menu, and QueuePage, and their controllers.
 The artifacts are used for navigation of the game from one interface to another 
 and are currently located in the dev branch BattleBoats-Scenes/src folder for controllers,
-and for fxml pages they are located in the same src folder in the Scenes folder.
+and for fxml pages they are located in the same src folder in the Scenes folder.Next steps
+involve further enhancing the navigation of the application and creating art for it.
 
 -----------------------------------------------------------------------
 SPRINT 1 - Single Player POC Game
