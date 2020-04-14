@@ -69,6 +69,10 @@ and are currently located in the dev branch BattleBoats-Scenes/src folder for co
 and for fxml pages they are located in the same src folder in the Scenes folder.Next steps
 involve further enhancing the navigation of the application and creating art for it.
 
+Aldo - Expanded the map to be 12 * 12 cells and intergrated the boat images into the player 
+game board. Next steps include cleaning up the UI such as changing the boat background to water and 
+presenting a boat in the enemy board once the boat has been sunked.
+
 -----------------------------------------------------------------------
 SPRINT 1 - Single Player POC Game
 
