@@ -60,6 +60,13 @@ Marcos - Implemented queue system with checkpoints. Next step involves planning 
 working queue for players to queue into and a better player class.
 Richard - created the initial shell project with client server and multiple screens
 
+As of sprint 2 Review and Retrospective:
+Team Members status:
+Marcos - Worked on The  fxml Scenes LoginPage, Menu, and QueuePage, and their controllers.
+The artifacts are used for navigation of the game from one interface to another 
+and are currently located in the dev branch BattleBoats-Scenes/src folder for controllers,
+and for fxml pages they are located in the same src folder in the Scenes folder.
+
 -----------------------------------------------------------------------
 SPRINT 1 - Single Player POC Game
 
@@ -69,6 +76,7 @@ SPRINT 1 - Single Player POC Game
 SPRINT 2 - Images and Completion of JavaFX Game Client
 
 ![Example screenshot](./SP2-Retro.png)
+
 
 ## Inspiration
 Project inspired by Battleship. This is our semester project for Software Engineering Spring 2020.
