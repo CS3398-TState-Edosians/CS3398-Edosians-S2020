@@ -83,7 +83,6 @@ SPRINT 2 - Images and Completion of JavaFX Game Client
 
 ![Example screenshot](./SP2-Retro.png)
 
-
 ## Inspiration
 Project inspired by Battleship. This is our semester project for Software Engineering Spring 2020.
 
