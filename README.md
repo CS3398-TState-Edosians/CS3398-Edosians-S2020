@@ -56,11 +56,32 @@ As of sprint 1, we have a working demo that allows for one player gameplay.
 
 Team members status
 Aldo - Finished the boats game board pieces. Next step is to add the pieces to the game.
-
 Marcos - Implemented queue system with checkpoints. Next step involves planning and and making a
 working queue for players to queue into and a better player class.
+Richard - created the initial shell project with client server and multiple screens
 
-Richard - Created initial build project with board creation and threading
+As of sprint 2 Review and Retrospective:
+Team Members status:
+
+Marcos - Worked on The  fxml Scenes LoginPage, Menu, and QueuePage, and their controllers.
+The artifacts are used for navigation of the game from one interface to another 
+and are currently located in the dev branch BattleBoats-Scenes/src folder for controllers,
+and for fxml pages they are located in the same src folder in the Scenes folder.Next steps
+involve further enhancing the navigation of the application and creating art for it.
+
+Aldo - Expanded the map to be 12 * 12 cells and intergrated the boat images into the player 
+game board. Next steps include cleaning up the UI such as changing the boat background to water and 
+presenting a boat in the enemy board once the boat has been sunked.
+
+-----------------------------------------------------------------------
+SPRINT 1 - Single Player POC Game
+
+![Example screenshot](./SP1-Retro.png)
+
+-----------------------------------------------------------------------
+SPRINT 2 - Images and Completion of JavaFX Game Client
+
+![Example screenshot](./SP2-Retro.png)
 
 ## Inspiration
 Project inspired by Battleship. This is our semester project for Software Engineering Spring 2020.
