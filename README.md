@@ -1,6 +1,6 @@
 # CS3398-Edosians-S2020
 # Battle Boats
-> Battle Boats is a multiplayer online game inspired by Battleship.
+> Battle Boats is strategy turn based game inspired by Battleship.
 
 ## Table of contents
 * [General info](#general-info)
