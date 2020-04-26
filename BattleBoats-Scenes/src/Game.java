@@ -37,6 +37,7 @@ public class Game {
             if(enemyBoard.ships<enemyShips)
             {
                 displayMessage("You Sank an Enemy Ship! \n");
+                enemyBoard.placeImage(cell.ship);
             }
             if (enemyBoard.ships == 0) {
                 displayMessage("YOU WIN");
@@ -53,7 +54,7 @@ public class Game {
                 return;
 
             Cell cell = (Cell) event.getSource();
-            if (playerBoard.placeShip(new Ship(shipsToPlace, event.getButton() == MouseButton.PRIMARY, false), cell.x, cell.y)) {
+            if (playerBoard.placeShip(new Ship(shipsToPlace, event.getButton() == MouseButton.PRIMARY, false, cell.x, cell.y), cell.x, cell.y)) {
                 if (--shipsToPlace == 1) {
                     startGame();
                 }
@@ -77,7 +78,7 @@ public class Game {
             int x = random.nextInt(10);
             int y = random.nextInt(10);
 
-            if (enemyBoard.placeShip(new Ship(type, Math.random() < 0.5, true), x, y)) {
+            if (enemyBoard.placeShip(new Ship(type, Math.random() < 0.5, true, x, y), x, y)) {
                 type--;
             }
         }

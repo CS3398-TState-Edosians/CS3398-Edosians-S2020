@@ -7,12 +7,16 @@ public class Ship extends Parent {
     public boolean vertical = true;
     public boolean isEnemy;
     private int health;
+    public int x;
+    public int y;
 
     /*Constructor*/
-    public Ship(int type, boolean vertical, boolean isEnemy) {
+    public Ship(int type, boolean vertical, boolean isEnemy, int x, int y) {
         this.type = type;
         this.vertical = vertical;
         this.isEnemy= isEnemy;
+        this.x = x;
+        this.y = y;
         health = type;
 
         switch (type){
