@@ -3,6 +3,8 @@ import javafx.scene.Parent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.TextArea;
+import java.awt.*;
 import java.util.Random;
 
 
@@ -10,6 +12,7 @@ public class Game {
 
     private boolean running = false;
     private Board enemyBoard, playerBoard;
+    private TextArea chatBox;
     private int shipsToPlace = 5;
     private boolean enemyTurn = false;
     private Random random = new Random();
@@ -17,20 +20,26 @@ public class Game {
     /*createContent*/
     public Parent createContent() {
         BorderPane root = new BorderPane();
-        root.setPrefSize(311, 100);
+        root.setPrefSize(600, 100);
+        chatBox = new TextArea();
 
         enemyBoard = new Board(true, event -> {
             if (!running)
                 return;
 
             Cell cell = (Cell) event.getSource();
+            int enemyShips = enemyBoard.ships;
             if (cell.wasShot)
                 return;
 
             enemyTurn = !cell.shoot();
 
+            if(enemyBoard.ships<enemyShips)
+            {
+                displayMessage("You Sank an Enemy Ship! \n");
+            }
             if (enemyBoard.ships == 0) {
-                System.out.println("YOU WIN");
+                displayMessage("YOU WIN");
                 System.exit(0);
             }
 
@@ -44,8 +53,8 @@ public class Game {
                 return;
 
             Cell cell = (Cell) event.getSource();
-            if (playerBoard.placeShip(new Ship(shipsToPlace, event.getButton() == MouseButton.PRIMARY), cell.x, cell.y)) {
-                if (--shipsToPlace == 0) {
+            if (playerBoard.placeShip(new Ship(shipsToPlace, event.getButton() == MouseButton.PRIMARY, false), cell.x, cell.y)) {
+                if (--shipsToPlace == 1) {
                     startGame();
                 }
             }
@@ -54,8 +63,8 @@ public class Game {
 
         VBox vbox = new VBox(40, enemyBoard, playerBoard);
         vbox.setAlignment(Pos.TOP_LEFT);
-        root.setCenter(vbox);
-
+        root.setLeft(vbox);
+        root.setRight(chatBox);
         return root;
     }
 
@@ -65,10 +74,10 @@ public class Game {
 
         // place enemy ships
         while (type > 0) {
-            int x = random.nextInt(12);
-            int y = random.nextInt(12);
+            int x = random.nextInt(10);
+            int y = random.nextInt(10);
 
-            if (enemyBoard.placeShip(new Ship(type, Math.random() < 0.5), x, y)) {
+            if (enemyBoard.placeShip(new Ship(type, Math.random() < 0.5, true), x, y)) {
                 type--;
             }
         }
@@ -79,8 +88,9 @@ public class Game {
     /*enemyMove*/
     private void enemyMove() {
         while (enemyTurn) {
-            int x = random.nextInt(12);
-            int y = random.nextInt(12);
+            int x = random.nextInt(10);
+            int y = random.nextInt(10);
+            int playerShips = playerBoard.ships;
 
             Cell cell = playerBoard.getCell(x, y);
             if (cell.wasShot)
@@ -88,12 +98,21 @@ public class Game {
 
             enemyTurn = cell.shoot();
 
+            if(playerBoard.ships < playerShips)
+            {
+                displayMessage("Enemy Sunk a Ship! \n");
+            }
             if (playerBoard.ships == 0) {
-                System.out.println("YOU LOSE");
+                displayMessage("YOU LOSE");
                 System.exit(0);
             }
         }
 
+    }
+
+    public void displayMessage(String message)
+    {
+        this.chatBox.appendText(message);
     }
 
 
