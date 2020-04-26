@@ -19,7 +19,7 @@ public class Board extends Parent {
     private Pane pane = new Pane();
     private VBox rows = new VBox();
     private boolean enemy = false;
-    public int ships = 4;
+    public int ships = 5;
 
     /*Constructor*/
     public Board(boolean enemy, EventHandler<? super MouseEvent> handler) {
@@ -42,7 +42,7 @@ public class Board extends Parent {
     /*placeShip*/
     public boolean placeShip(Ship ship, int x, int y) {
         if (canPlaceShip(ship, x, y)) {
-            int length = ship.type;
+            int length = ship.len;
 
             if (ship.vertical) {
                 for (int i = y; i < y + length; i++) {
@@ -81,15 +81,15 @@ public class Board extends Parent {
         }
         imageView.setImage(boatImg);
         if (ship.vertical) {
-            imageView.setY(31 * ((double) ship.y + ship.type / 2.0) - 15);
-            imageView.setX(31 * ((double) ship.x - ship.type / 2.0) + 15);
+            imageView.setY(31 * ((double) ship.y + ship.len / 2.0) - 15);
+            imageView.setX(31 * ((double) ship.x - ship.len / 2.0) + 15);
             imageView.setFitHeight(30);
-            imageView.setFitWidth(30 * ship.type);
+            imageView.setFitWidth(30 * ship.len);
             imageView.setRotate(90);
         }
         else {
             imageView.setFitHeight(30);
-            imageView.setFitWidth(30 * ship.type);
+            imageView.setFitWidth(30 * ship.len);
             imageView.setY(31 * ship.y);
             imageView.setX(31 * ship.x);
         }
@@ -105,10 +105,6 @@ public class Board extends Parent {
     private Cell[] getNeighbors(int x, int y) {
         Point2D[] points = new Point2D[] {
                 new Point2D(x,y)
-                /*new Point2D(x - 1, y),
-                new Point2D(x + 1, y),
-                new Point2D(x, y - 1),
-                new Point2D(x, y + 1)*/
         };
 
         List<Cell> neighbors = new ArrayList<Cell>();
@@ -124,7 +120,7 @@ public class Board extends Parent {
 
     /*canPlaceShip*/
     private boolean canPlaceShip(Ship ship, int x, int y) {
-        int length = ship.type;
+        int length = ship.len;
 
         if (ship.vertical) {
             for (int i = y; i < y + length; i++) {

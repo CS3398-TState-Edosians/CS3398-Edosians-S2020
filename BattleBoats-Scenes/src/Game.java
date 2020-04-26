@@ -55,7 +55,7 @@ public class Game {
 
             Cell cell = (Cell) event.getSource();
             if (playerBoard.placeShip(new Ship(shipsToPlace, event.getButton() == MouseButton.PRIMARY, false, cell.x, cell.y), cell.x, cell.y)) {
-                if (--shipsToPlace == 1) {
+                if (--shipsToPlace == 0) {
                     startGame();
                 }
             }
@@ -89,8 +89,8 @@ public class Game {
     /*enemyMove*/
     private void enemyMove() {
         while (enemyTurn) {
-            int x = random.nextInt(10);
-            int y = random.nextInt(10);
+            int x = random.nextInt(12);
+            int y = random.nextInt(12);
             int playerShips = playerBoard.ships;
 
             Cell cell = playerBoard.getCell(x, y);
