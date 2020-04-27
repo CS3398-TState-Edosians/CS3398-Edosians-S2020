@@ -25,14 +25,17 @@ public class LoginController {
             /*TODO*/
         }
         else{
+
+            //for welcome message
+            User user = new User(userStr);
+            user.writeUserToInfoFile();
+
             //load menu page
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("Scenes/Menu.fxml"));
             Parent MenuRoot = loader.load();
 
-            //set welcome message
-            MenuController cn = loader.getController();
-            cn.msgLabel.setText("welcome "+ userStr);
+
 
             //get current Stage
             Stage window = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
