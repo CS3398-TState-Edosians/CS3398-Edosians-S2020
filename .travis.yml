@@ -7,7 +7,7 @@ install: true
 matrix:
   include:
   - jdk: openjdk8
-  - package: javafx
+  - package: javafx.fxml
 
 script:
   - git config --global push.default simple
