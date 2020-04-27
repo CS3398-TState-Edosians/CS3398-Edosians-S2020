@@ -1,4 +1,5 @@
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -11,6 +12,13 @@ import java.io.IOException;
 public class MenuController {
 
     public Label msgLabel;
+    public User user;
+
+    @FXML
+    public void initialize(){
+        user = User.readUserFromFile();
+        msgLabel.setText("Welcome "+ user.getUserName());
+    }
 
     /*SinglePlayerBtn*/
     public void SinglePlayerBtn(MouseEvent mouseEvent)throws IOException {
@@ -19,6 +27,7 @@ public class MenuController {
         Stage window = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
         window.setScene(scene);
     }
+
 
     /*ExitBtn*/
     public void ExitBtn() {
