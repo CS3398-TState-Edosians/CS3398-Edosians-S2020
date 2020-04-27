@@ -6,7 +6,7 @@
 
     <target name="compile">
         <mkdir dir="build/classes"/>
-        <javac  srcdir="src"
+        <javac  srcdir="BattleBoats-Scenes/src"
                 destdir="build/classes"
                 includeantruntime="false"/>
     </target>
