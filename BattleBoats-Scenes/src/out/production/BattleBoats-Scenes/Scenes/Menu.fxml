@@ -2,17 +2,38 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #006994;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
    <children>
-      <AnchorPane layoutX="175.0" layoutY="106.0" prefHeight="280.0" prefWidth="250.0">
+      <AnchorPane layoutX="175.0" layoutY="106.0" prefHeight="112.0" prefWidth="250.0">
          <children>
-            <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#SinglePlayerBtn" prefHeight="30.0" prefWidth="200.0" text="SinglePlayer" />
-            <Button layoutX="19.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#MultiplayerBtn" prefHeight="30.0" prefWidth="200.0" text="Multiplayer" />
-            <Button layoutX="19.0" layoutY="225.0" mnemonicParsing="false" onMouseClicked="#ExitBtn" prefHeight="30.0" prefWidth="200.0" text="Exit" />
+            <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#SinglePlayerBtn" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #43464B;" text="SinglePlayer" textFill="#02e2ff">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Button layoutX="39.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#ExitBtn" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #43464B;" text="Exit" textFill="RED">
+               <font>
+                  <Font name="Calibri" size="15.0" />
+               </font></Button>
          </children>
       </AnchorPane>
-      <Label fx:id="msgLabel" alignment="CENTER" layoutX="192.0" layoutY="23.0" prefHeight="40.0" prefWidth="200.0" text="BattleBoats" />
+      <Label fx:id="msgLabel" alignment="CENTER" layoutX="9.0" layoutY="23.0" prefHeight="40.0" prefWidth="583.0" text="BattleBoats">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font></Label>
+      <ImageView fitHeight="153.0" fitWidth="297.0" layoutX="152.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/submarine_login.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="76.0" layoutX="516.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/edosian.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
