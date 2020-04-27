@@ -6,6 +6,7 @@ import javafx.scene.shape.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Random;
 
 public class Cell extends Rectangle {
 
@@ -37,8 +38,14 @@ public class Cell extends Rectangle {
         }
         else {
             Image obstructionImage = null;
+            Random r = new Random();
+            int low = 1;
+            int high = 4;
+            int result = r.nextInt(high-low) + low;
             try {
-                File file = new File("src/Assets/Obstruction.png");
+ //                   if (r == 1)
+ //                   {
+                File file = new File("src/Assets/Obstruction_" + result + ".png");
                 obstructionImage = new Image(new FileInputStream(file));
             } catch (FileNotFoundException e) {
 
