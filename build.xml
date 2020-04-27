@@ -5,15 +5,15 @@
     </target>
 
     <target name="compile">
+        <taskdef resource="com/sun/javafx/tools/ant/antlib.xml"
+        uri="javafx:com.sun.javafx.tools.ant"
+        classpath="${JAVA_HOME}/lib/ant-javafx.jar"/>
         <mkdir dir="build/classes"/>
         <javac  srcdir="BattleBoats-Scenes/src;
                         BattleBoats-Scenes/src/Assets;
                         BattleBoats-Scenes/src/Scenes;"
                 destdir="build/classes"
                 includeantruntime="false"/>
-        <taskdef resource="com/sun/javafx/tools/ant/antlib.xml"
-        uri="javafx:com.sun.javafx.tools.ant"
-        classpath="${JAVA_HOME}/lib/ant-javafx.jar"/>
     </target>
 
     <target name="jar">
