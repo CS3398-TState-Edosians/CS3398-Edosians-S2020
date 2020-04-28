@@ -1,10 +1,16 @@
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+
 import java.awt.*;
+import java.io.IOException;
 import java.util.Random;
 
 
@@ -16,6 +22,10 @@ public class Game {
     private int shipsToPlace = 5;
     private boolean enemyTurn = false;
     private Random random = new Random();
+    private Stage window;
+
+    public Game(Stage window){this.window = window;}
+
 
     /*createContent*/
     public Parent createContent() {
@@ -41,7 +51,17 @@ public class Game {
             }
             if (enemyBoard.ships == 0) {
                 displayMessage("YOU WIN");
-                System.exit(0);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("Scenes/WinScreen.fxml"));
+                Parent MenuRoot;
+                try {
+                    MenuRoot = loader.load();
+                    Scene MenuPage = new Scene(MenuRoot, 600, 400);
+                    window.setScene(MenuPage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             if (enemyTurn)
@@ -105,7 +125,16 @@ public class Game {
             }
             if (playerBoard.ships == 0) {
                 displayMessage("YOU LOSE");
-                System.exit(0);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("Scenes/LoseScreen.fxml"));
+                Parent MenuRoot;
+                try {
+                    MenuRoot = loader.load();
+                    Scene MenuPage = new Scene(MenuRoot, 600, 400);
+                    window.setScene(MenuPage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

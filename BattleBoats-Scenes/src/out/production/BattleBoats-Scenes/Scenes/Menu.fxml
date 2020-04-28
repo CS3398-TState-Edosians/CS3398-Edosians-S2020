@@ -27,7 +27,7 @@
          </font></Label>
       <ImageView fitHeight="153.0" fitWidth="297.0" layoutX="152.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Assets/submarine_login.png" />
+            <Image url="@../Assets/MenuPageIMG.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="63.0" fitWidth="76.0" layoutX="516.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">

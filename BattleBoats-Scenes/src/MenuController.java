@@ -18,14 +18,14 @@ public class MenuController {
     @FXML
     public void initialize(){
         user = User.readUserFromFile();
-        msgLabel.setText("welcome "+ user.getUserName());
+        msgLabel.setText("Welcome "+ user.getUserName());
     }
 
     /*SinglePlayerBtn*/
     public void SinglePlayerBtn(MouseEvent mouseEvent)throws IOException {
-        Game game = new Game();
-        Scene scene = new Scene(game.createContent());
         Stage window = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        Game game = new Game(window);
+        Scene scene = new Scene(game.createContent());
         window.setScene(scene);
     }
 
