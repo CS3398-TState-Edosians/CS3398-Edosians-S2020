@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.Random;
 
 
+
 public class Game {
 
     private boolean running = false;
@@ -16,6 +17,8 @@ public class Game {
     private int shipsToPlace = 5;
     private boolean enemyTurn = false;
     private Random random = new Random();
+    private boolean isPredicting = false;
+    private Cell lasthit = null;
 
     /*createContent*/
     public Parent createContent() {
@@ -37,6 +40,7 @@ public class Game {
             if(enemyBoard.ships<enemyShips)
             {
                 displayMessage("You Sank an Enemy Ship! \n");
+                displayMessage(phraseGenerator(true));
                 enemyBoard.placeImage(cell.ship);
             }
             if (enemyBoard.ships == 0) {
@@ -89,25 +93,92 @@ public class Game {
     /*enemyMove*/
     private void enemyMove() {
         while (enemyTurn) {
-            int x = random.nextInt(12);
-            int y = random.nextInt(12);
+            int x;
+            int y;
             int playerShips = playerBoard.ships;
+            int phrasechance;
+            Cell cell;
 
-            Cell cell = playerBoard.getCell(x, y);
+            if(isPredicting)
+            {
+                x = lasthit.x;
+                y = lasthit.y;
+                int choice = random.nextInt(4);
+                switch(choice){
+                    case 1 : x++;
+                    case 2 : y++;
+                    case 3 : y--;
+                    case 4 : x--;
+                }
+
+                cell = playerBoard.getCell(x, y);
+            }
+            else
+            {
+                x = random.nextInt(12);
+                y = random.nextInt(12);
+                cell = playerBoard.getCell(x, y);
+            }
+
             if (cell.wasShot)
                 continue;
 
-            enemyTurn = cell.shoot();
 
             if(playerBoard.ships < playerShips)
             {
+                isPredicting= false;
                 displayMessage("Enemy Sunk a Ship! \n");
+                displayMessage(phraseGenerator(false));
+            }
+            if(cell.ship != null)
+            {
+                lasthit = cell;
+                isPredicting = true;
+                phrasechance = random.nextInt(3);
+                if(phrasechance==3)
+                {
+                    displayMessage(phraseGenerator(false));
+                }
+            }
+            else
+            {
+                isPredicting = false;
             }
             if (playerBoard.ships == 0) {
                 displayMessage("YOU LOSE");
                 System.exit(0);
             }
         }
+
+    }
+
+    private String phraseGenerator(boolean isAngry){
+
+        String phrase = null;
+        int phrasenumber;
+
+        phrasenumber = random.nextInt(5);
+        if(isAngry)
+        {
+            switch (phrasenumber){
+                case 1: phrase = "Enemy: How dare you!";
+                case 2: phrase = "Enemy: You are a tough opponent...";
+                case 3: phrase = "Enemy: yo win  this time.";
+                case 4: phrase = "Enemy: Impossible!";
+                case 5: phrase = "Enemy: Failure is unacceptable.";
+            }
+        }
+        else
+        {
+            switch (phrasenumber){
+                case 1: phrase = "Enemy: Another perfect shot.";
+                case 2: phrase = "Enemy: Too Easy.";
+                case 3: phrase = "Enemy: I've got you now.";
+                case 4: phrase = "Enemy: Tough luck...";
+                case 5: phrase = "Enemy: I am the battle boat master!";
+            }
+        }
+        return phrase;
 
     }
 
