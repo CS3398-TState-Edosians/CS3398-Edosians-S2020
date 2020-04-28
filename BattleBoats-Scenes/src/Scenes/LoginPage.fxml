@@ -31,6 +31,7 @@
             <Font name="Courier New" size="31.0" />
          </font>
       </Label>
+      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="94.0" layoutY="160.0"  pickOnBounds="true" preserveRatio="true" />
    </AnchorPane>
    <Label layoutX="219.0" layoutY="14.0" prefHeight="38.0" prefWidth="163.0" text="BattleBoats">
       <font>
