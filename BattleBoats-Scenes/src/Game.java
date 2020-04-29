@@ -18,7 +18,9 @@ public class Game {
     private boolean enemyTurn = false;
     private Random random = new Random();
     private boolean isPredicting = false;
+    private boolean isPredictingDirection = false;
     private Cell lasthit = null;
+    private int predictionDirection;
 
     /*createContent*/
     public Parent createContent() {
@@ -98,12 +100,26 @@ public class Game {
             int playerShips = playerBoard.ships;
             int phrasechance;
             Cell cell;
+            int choice;
 
-            if(isPredicting)
+            if(isPredictingDirection)
             {
                 x = lasthit.x;
                 y = lasthit.y;
-                int choice = random.nextInt(4);
+                choice = predictionDirection;
+                switch(choice){
+                    case 1 : x++;
+                    case 2 : y++;
+                    case 3 : y--;
+                    case 4 : x--;
+                }
+                cell = playerBoard.getCell(x, y);
+            }
+            else if(isPredicting)
+            {
+                x = lasthit.x;
+                y = lasthit.y;
+                choice = random.nextInt(4);
                 switch(choice){
                     case 1 : x++;
                     case 2 : y++;
@@ -112,6 +128,11 @@ public class Game {
                 }
 
                 cell = playerBoard.getCell(x, y);
+                if(cell.ship != null)
+                {
+                    isPredictingDirection = true;
+                    predictionDirection = choice;
+                }
             }
             else
             {
@@ -161,21 +182,21 @@ public class Game {
         if(isAngry)
         {
             switch (phrasenumber){
-                case 1: phrase = "Enemy: How dare you!";
-                case 2: phrase = "Enemy: You are a tough opponent...";
-                case 3: phrase = "Enemy: yo win  this time.";
-                case 4: phrase = "Enemy: Impossible!";
-                case 5: phrase = "Enemy: Failure is unacceptable.";
+                case 1: phrase = "Enemy: How dare you! \n";
+                case 2: phrase = "Enemy: You are a tough opponent... \n";
+                case 3: phrase = "Enemy: yo win  this time. \n";
+                case 4: phrase = "Enemy: Impossible! \n";
+                case 5: phrase = "Enemy: Failure is unacceptable. \n";
             }
         }
         else
         {
             switch (phrasenumber){
-                case 1: phrase = "Enemy: Another perfect shot.";
-                case 2: phrase = "Enemy: Too Easy.";
-                case 3: phrase = "Enemy: I've got you now.";
-                case 4: phrase = "Enemy: Tough luck...";
-                case 5: phrase = "Enemy: I am the battle boat master!";
+                case 1: phrase = "Enemy: Another perfect shot. \n";
+                case 2: phrase = "Enemy: Too Easy. \n";
+                case 3: phrase = "Enemy: I've got you now. \n";
+                case 4: phrase = "Enemy: Tough luck... \n";
+                case 5: phrase = "Enemy: I am the battle boat master! \n";
             }
         }
         return phrase;
