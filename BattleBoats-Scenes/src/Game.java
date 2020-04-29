@@ -113,19 +113,27 @@ public class Game {
                     case 3 : y--;
                     case 4 : x--;
                 }
+                if(x>12||y>12)
+                {
+                    x = random.nextInt(12);
+                    y = random.nextInt(12);
+                }
                 cell = playerBoard.getCell(x, y);
             }
             else if(isPredicting)
             {
-                x = lasthit.x;
-                y = lasthit.y;
-                choice = random.nextInt(4);
-                switch(choice){
-                    case 1 : x++;
-                    case 2 : y++;
-                    case 3 : y--;
-                    case 4 : x--;
-                }
+                do
+                {
+                    x = lasthit.x;
+                    y = lasthit.y;
+                    choice = random.nextInt(4);
+                    switch(choice){
+                        case 1 : x++;
+                        case 2 : y++;
+                        case 3 : y--;
+                        case 4 : x--;
+                    }
+                }while(x>12||y>12);
 
                 cell = playerBoard.getCell(x, y);
                 if(cell.ship != null)
