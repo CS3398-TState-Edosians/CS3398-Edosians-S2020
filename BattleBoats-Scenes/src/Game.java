@@ -41,7 +41,25 @@ public class Game {
 
             if(enemyBoard.ships<enemyShips)
             {
-                displayMessage("You Sank an Enemy Ship! \n");
+                String name;
+                int type = cell.ship.type;
+                switch (type){
+                    case 5:
+                        name = "aircraft carrier";
+                        break;
+                    case 4:
+                        name = "battleship";
+                        break;
+                    case 3:
+                        name = "destroyer";
+                        break;
+                    case 2:
+                        name = "submarine";
+                        break;
+                    default:
+                        name = "cruiser";
+                }
+                displayMessage("You Sank an Enemy " + name +"! \n");
                 displayMessage(phraseGenerator(true));
                 enemyBoard.placeImage(cell.ship);
             }
@@ -156,7 +174,25 @@ public class Game {
             if(playerBoard.ships < playerShips)
             {
                 isPredicting= false;
-                displayMessage("Enemy Sunk a Ship! \n");
+                String name;
+                int type = cell.ship.type;
+                switch (type){
+                    case 5:
+                        name = "aircraft carrier";
+                        break;
+                    case 4:
+                        name = "battleship";
+                        break;
+                    case 3:
+                        name = "destroyer";
+                        break;
+                    case 2:
+                        name = "submarine";
+                        break;
+                    default:
+                        name = "cruiser";
+                }
+                displayMessage("Enemy Sunk your " + name + "! \n");
                 displayMessage(phraseGenerator(false));
             }
             if(cell.ship != null)
