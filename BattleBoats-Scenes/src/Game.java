@@ -174,6 +174,7 @@ public class Game {
             if(playerBoard.ships < playerShips)
             {
                 isPredicting= false;
+                isPredictingDirection= false;
                 String name;
                 int type = cell.ship.type;
                 switch (type){
@@ -208,6 +209,7 @@ public class Game {
             else
             {
                 isPredicting = false;
+                isPredictingDirection = false;
             }
             if (playerBoard.ships == 0) {
                 displayMessage("YOU LOSE");
