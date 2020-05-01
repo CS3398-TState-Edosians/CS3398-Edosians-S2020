@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Random;
-
-
 public class Game {
 
     private boolean running = false;
@@ -25,13 +23,17 @@ public class Game {
     private Stage window;
 
     public Game(Stage window){this.window = window;}
-
+    private boolean isPredicting = false;
+    private boolean isPredictingDirection = false;
+    private Cell lastSpotted = null;
+    private int predictionDirection;
 
     /*createContent*/
     public Parent createContent() {
         BorderPane root = new BorderPane();
         root.setPrefSize(600, 100);
         chatBox = new TextArea();
+        chatBox.setEditable(false);
 
         enemyBoard = new Board(true, event -> {
             if (!running)
@@ -109,22 +111,141 @@ public class Game {
     /*enemyMove*/
     private void enemyMove() {
         while (enemyTurn) {
-            int x = random.nextInt(12);
-            int y = random.nextInt(12);
+            int x;
+            int y;
             int playerShips = playerBoard.ships;
+            int phrasechance;
+            Cell cell;
+            int choice;
 
-            Cell cell = playerBoard.getCell(x, y);
+            if (isPredictingDirection) {
+                do {
+                    x = lastSpotted.x;
+                    y = lastSpotted.y;
+                    choice = predictionDirection;
+                    switch (choice) {
+                        case 1:
+                            x++;
+                            break;
+                        case 2:
+                            y++;
+                            break;
+                        case 3:
+                            y--;
+                            break;
+                        case 4:
+                            x--;
+                            break;
+                    }
+                    if (x > 12 || y > 12) {
+                        switch (predictionDirection) {
+                            case 1:
+                                predictionDirection = 4;
+                                break;
+                            case 4:
+                                predictionDirection = 1;
+                                break;
+                            case 2:
+                                predictionDirection = 3;
+                                break;
+                            case 3:
+                                predictionDirection = 4;
+                                break;
+                        }
+                    }
+                } while (x > 12 || y > 12);
+
+
+                cell = playerBoard.getCell(x, y);
+            } else if (isPredicting) {
+                do {
+                    x = lastSpotted.x;
+                    y = lastSpotted.y;
+                    choice = random.nextInt(4);
+                    switch (choice) {
+                        case 1:
+                            x++;
+                            break;
+                        case 2:
+                            y++;
+                            break;
+                        case 3:
+                            y--;
+                            break;
+                        case 4:
+                            x--;
+                            break;
+                    }
+                } while (x > 12 || y > 12);
+
+                cell = playerBoard.getCell(x, y);
+                if (cell.ship != null) {
+                    isPredictingDirection = true;
+                    predictionDirection = choice;
+                }
+            } else {
+                x = random.nextInt(12);
+                y = random.nextInt(12);
+                cell = playerBoard.getCell(x, y);
+            }
+
+            if (cell.ship != null) {
+                lastSpotted = cell;
+            }
+
             if (cell.wasShot)
                 continue;
 
             enemyTurn = cell.shoot();
 
-            if(playerBoard.ships < playerShips)
-            {
-                displayMessage("Enemy Sunk a Ship! \n");
-            }
-            if (playerBoard.ships == 0) {
-                displayMessage("YOU LOSE");
+            if (playerBoard.ships < playerShips) {
+                isPredicting = false;
+                isPredictingDirection = false;
+                String name;
+                int type = cell.ship.type;
+                switch (type) {
+                    case 5:
+                        name = "aircraft carrier";
+                        break;
+                    case 4:
+                        name = "battleship";
+                        break;
+                    case 3:
+                        name = "destroyer";
+                        break;
+                    case 2:
+                        name = "submarine";
+                        break;
+                    default:
+                        name = "cruiser";
+                }
+                displayMessage("Enemy Sunk your " + name + "! \n");
+                displayMessage(phraseGenerator(false));
+            } else if (cell.ship != null) {
+                isPredicting = true;
+                phrasechance = random.nextInt(3);
+                if (phrasechance == 3) {
+                    displayMessage(phraseGenerator(false));
+                }
+            } else {
+                if (isPredictingDirection) {
+                    switch (predictionDirection) {
+                        case 1:
+                            predictionDirection = 4;
+                            break;
+                        case 4:
+                            predictionDirection = 1;
+                            break;
+                        case 2:
+                            predictionDirection = 3;
+                            break;
+                        case 3:
+                            predictionDirection = 4;
+                            break;
+                    }
+                }
+                if (playerBoard.ships == 0) {
+                    displayMessage("YOU LOSE");
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("Scenes/LoseScreen.fxml"));
                 Parent MenuRoot;
@@ -140,10 +261,57 @@ public class Game {
 
     }
 
-    public void displayMessage(String message)
-    {
-        this.chatBox.appendText(message);
+        private String phraseGenerator ( boolean isAngry){
+
+            String phrase = null;
+            int phrasenumber;
+
+            phrasenumber = random.nextInt(5);
+            if (isAngry) {
+                switch (phrasenumber) {
+                    case 1:
+                        phrase = "Enemy: How dare you! \n";
+                        break;
+                    case 2:
+                        phrase = "Enemy: You are a tough opponent... \n";
+                        break;
+                    case 3:
+                        phrase = "Enemy: yo win  this time. \n";
+                        break;
+                    case 4:
+                        phrase = "Enemy: Impossible! \n";
+                        break;
+                    case 5:
+                        phrase = "Enemy: Failure is unacceptable. \n";
+                        break;
+                }
+            } else {
+                switch (phrasenumber) {
+                    case 1:
+                        phrase = "Enemy: Another perfect shot. \n";
+                        break;
+                    case 2:
+                        phrase = "Enemy: Too Easy. \n";
+                        break;
+                    case 3:
+                        phrase = "Enemy: I've got you now. \n";
+                        break;
+                    case 4:
+                        phrase = "Enemy: Tough luck... \n";
+                        break;
+                    case 5:
+                        phrase = "Enemy: I am the battle boat master! \n";
+                        break;
+                }
+            }
+            return phrase;
+
+        }
+
+        public void displayMessage (String message)
+        {
+            this.chatBox.appendText(message);
+        }
+
+
     }
-
-
-}
