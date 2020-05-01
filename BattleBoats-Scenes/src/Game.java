@@ -19,7 +19,7 @@ public class Game {
     private Random random = new Random();
     private boolean isPredicting = false;
     private boolean isPredictingDirection = false;
-    private Cell lasthit = null;
+    private Cell lastSpotted = null;
     private int predictionDirection;
 
     /*createContent*/
@@ -27,6 +27,7 @@ public class Game {
         BorderPane root = new BorderPane();
         root.setPrefSize(600, 100);
         chatBox = new TextArea();
+        chatBox.setEditable(false);
 
         enemyBoard = new Board(true, event -> {
             if (!running)
@@ -120,64 +121,92 @@ public class Game {
             Cell cell;
             int choice;
 
-            if(isPredictingDirection)
-            {
-                x = lasthit.x;
-                y = lasthit.y;
-                choice = predictionDirection;
-                switch(choice){
-                    case 1 : x++;
-                    case 2 : y++;
-                    case 3 : y--;
-                    case 4 : x--;
-                }
-                if(x>12||y>12)
-                {
-                    x = random.nextInt(12);
-                    y = random.nextInt(12);
-                }
-                cell = playerBoard.getCell(x, y);
-            }
-            else if(isPredicting)
-            {
-                do
-                {
-                    x = lasthit.x;
-                    y = lasthit.y;
-                    choice = random.nextInt(4);
-                    switch(choice){
-                        case 1 : x++;
-                        case 2 : y++;
-                        case 3 : y--;
-                        case 4 : x--;
+            if (isPredictingDirection) {
+                do {
+                    x = lastSpotted.x;
+                    y = lastSpotted.y;
+                    choice = predictionDirection;
+                    switch (choice) {
+                        case 1:
+                            x++;
+                            break;
+                        case 2:
+                            y++;
+                            break;
+                        case 3:
+                            y--;
+                            break;
+                        case 4:
+                            x--;
+                            break;
                     }
-                }while(x>12||y>12);
+                    if (x > 12 || y > 12) {
+                        switch (predictionDirection) {
+                            case 1:
+                                predictionDirection = 4;
+                                break;
+                            case 4:
+                                predictionDirection = 1;
+                                break;
+                            case 2:
+                                predictionDirection = 3;
+                                break;
+                            case 3:
+                                predictionDirection = 4;
+                                break;
+                        }
+                    }
+                } while (x > 12 || y > 12);
+
 
                 cell = playerBoard.getCell(x, y);
-                if(cell.ship != null)
-                {
+            } else if (isPredicting) {
+                do {
+                    x = lastSpotted.x;
+                    y = lastSpotted.y;
+                    choice = random.nextInt(4);
+                    switch (choice) {
+                        case 1:
+                            x++;
+                            break;
+                        case 2:
+                            y++;
+                            break;
+                        case 3:
+                            y--;
+                            break;
+                        case 4:
+                            x--;
+                            break;
+                    }
+                } while (x > 12 || y > 12);
+
+                cell = playerBoard.getCell(x, y);
+                if (cell.ship != null) {
                     isPredictingDirection = true;
                     predictionDirection = choice;
                 }
-            }
-            else
-            {
+            } else {
                 x = random.nextInt(12);
                 y = random.nextInt(12);
                 cell = playerBoard.getCell(x, y);
             }
 
+            if (cell.ship != null) {
+                lastSpotted = cell;
+            }
+
             if (cell.wasShot)
                 continue;
 
+            enemyTurn = cell.shoot();
 
-            if(playerBoard.ships < playerShips)
-            {
-                isPredicting= false;
-                isPredictingDirection= false;
+            if (playerBoard.ships < playerShips) {
+                isPredicting = false;
+                isPredictingDirection = false;
                 String name;
                 int type = cell.ship.type;
-                switch (type){
+                switch (type) {
                     case 5:
                         name = "aircraft carrier";
                         break;
@@ -195,64 +224,88 @@ public class Game {
                 }
                 displayMessage("Enemy Sunk your " + name + "! \n");
                 displayMessage(phraseGenerator(false));
-            }
-            if(cell.ship != null)
-            {
-                lasthit = cell;
+            } else if (cell.ship != null) {
                 isPredicting = true;
                 phrasechance = random.nextInt(3);
-                if(phrasechance==3)
-                {
+                if (phrasechance == 3) {
                     displayMessage(phraseGenerator(false));
                 }
+            } else {
+                if (isPredictingDirection) {
+                    switch (predictionDirection) {
+                        case 1:
+                            predictionDirection = 4;
+                            break;
+                        case 4:
+                            predictionDirection = 1;
+                            break;
+                        case 2:
+                            predictionDirection = 3;
+                            break;
+                        case 3:
+                            predictionDirection = 4;
+                            break;
+                    }
+                }
+                if (playerBoard.ships == 0) {
+                    displayMessage("YOU LOSE");
+                    System.exit(0);
+                }
             }
-            else
-            {
-                isPredicting = false;
-                isPredictingDirection = false;
+
+        }}
+
+        private String phraseGenerator ( boolean isAngry){
+
+            String phrase = null;
+            int phrasenumber;
+
+            phrasenumber = random.nextInt(5);
+            if (isAngry) {
+                switch (phrasenumber) {
+                    case 1:
+                        phrase = "Enemy: How dare you! \n";
+                        break;
+                    case 2:
+                        phrase = "Enemy: You are a tough opponent... \n";
+                        break;
+                    case 3:
+                        phrase = "Enemy: yo win  this time. \n";
+                        break;
+                    case 4:
+                        phrase = "Enemy: Impossible! \n";
+                        break;
+                    case 5:
+                        phrase = "Enemy: Failure is unacceptable. \n";
+                        break;
+                }
+            } else {
+                switch (phrasenumber) {
+                    case 1:
+                        phrase = "Enemy: Another perfect shot. \n";
+                        break;
+                    case 2:
+                        phrase = "Enemy: Too Easy. \n";
+                        break;
+                    case 3:
+                        phrase = "Enemy: I've got you now. \n";
+                        break;
+                    case 4:
+                        phrase = "Enemy: Tough luck... \n";
+                        break;
+                    case 5:
+                        phrase = "Enemy: I am the battle boat master! \n";
+                        break;
+                }
             }
-            if (playerBoard.ships == 0) {
-                displayMessage("YOU LOSE");
-                System.exit(0);
-            }
+            return phrase;
+
         }
 
-    }
-
-    private String phraseGenerator(boolean isAngry){
-
-        String phrase = null;
-        int phrasenumber;
-
-        phrasenumber = random.nextInt(5);
-        if(isAngry)
+        public void displayMessage (String message)
         {
-            switch (phrasenumber){
-                case 1: phrase = "Enemy: How dare you! \n";
-                case 2: phrase = "Enemy: You are a tough opponent... \n";
-                case 3: phrase = "Enemy: yo win  this time. \n";
-                case 4: phrase = "Enemy: Impossible! \n";
-                case 5: phrase = "Enemy: Failure is unacceptable. \n";
-            }
+            this.chatBox.appendText(message);
         }
-        else
-        {
-            switch (phrasenumber){
-                case 1: phrase = "Enemy: Another perfect shot. \n";
-                case 2: phrase = "Enemy: Too Easy. \n";
-                case 3: phrase = "Enemy: I've got you now. \n";
-                case 4: phrase = "Enemy: Tough luck... \n";
-                case 5: phrase = "Enemy: I am the battle boat master! \n";
-            }
-        }
-        return phrase;
+
 
     }
-
-    public void displayMessage(String message)
-    {
-        this.chatBox.appendText(message);
-    }
-
-
-}
