@@ -1,14 +1,17 @@
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+
 import java.awt.*;
+import java.io.IOException;
 import java.util.Random;
-
-
-
 public class Game {
 
     private boolean running = false;
@@ -17,6 +20,9 @@ public class Game {
     private int shipsToPlace = 5;
     private boolean enemyTurn = false;
     private Random random = new Random();
+    private Stage window;
+
+    public Game(Stage window){this.window = window;}
     private boolean isPredicting = false;
     private boolean isPredictingDirection = false;
     private Cell lastSpotted = null;
@@ -42,31 +48,22 @@ public class Game {
 
             if(enemyBoard.ships<enemyShips)
             {
-                String name;
-                int type = cell.ship.type;
-                switch (type){
-                    case 5:
-                        name = "aircraft carrier";
-                        break;
-                    case 4:
-                        name = "battleship";
-                        break;
-                    case 3:
-                        name = "destroyer";
-                        break;
-                    case 2:
-                        name = "submarine";
-                        break;
-                    default:
-                        name = "cruiser";
-                }
-                displayMessage("You Sank an Enemy " + name +"! \n");
-                displayMessage(phraseGenerator(true));
+                displayMessage("You Sank an Enemy Ship! \n");
                 enemyBoard.placeImage(cell.ship);
             }
             if (enemyBoard.ships == 0) {
                 displayMessage("YOU WIN");
-                System.exit(0);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("Scenes/WinScreen.fxml"));
+                Parent MenuRoot;
+                try {
+                    MenuRoot = loader.load();
+                    Scene MenuPage = new Scene(MenuRoot, 600, 400);
+                    window.setScene(MenuPage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             if (enemyTurn)
@@ -249,11 +246,20 @@ public class Game {
                 }
                 if (playerBoard.ships == 0) {
                     displayMessage("YOU LOSE");
-                    System.exit(0);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("Scenes/LoseScreen.fxml"));
+                Parent MenuRoot;
+                try {
+                    MenuRoot = loader.load();
+                    Scene MenuPage = new Scene(MenuRoot, 600, 400);
+                    window.setScene(MenuPage);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
+        }
 
-        }}
+    }
 
         private String phraseGenerator ( boolean isAngry){
 
