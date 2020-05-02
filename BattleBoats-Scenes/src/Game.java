@@ -67,7 +67,7 @@ public class Game {
                         name = "cruiser";
                 }
 
-                displayMessage("You Sank an Enemy " + name +"!");
+                displayMessage("You Sank an Enemy " + name + "! \n");
                 enemyBoard.placeImage(cell.ship);
             }
             if (enemyBoard.ships == 0) {
