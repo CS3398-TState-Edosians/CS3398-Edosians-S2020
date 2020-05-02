@@ -62,7 +62,7 @@ public class Cell extends Rectangle {
     }
 
     /*shoot*/
-    public boolean shoot() {
+    public void shoot() {
         wasShot = true;
         setFill(Color.BLACK);
 
@@ -91,10 +91,10 @@ public class Cell extends Rectangle {
                 board.ships--;
             }
 
-            return true;
+            //return true;
         }
 
-        return false;
+       // return false;
     }
 
 
