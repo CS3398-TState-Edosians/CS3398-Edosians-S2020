@@ -270,7 +270,7 @@ public class Game {
                     case 4:
                         phrase = "Enemy: Impossible! \n";
                         break;
-                    case:5
+                    case 5:
                         phrase = "Enemy: Failure is unacceptable. \n";
                         break;
                     case 6:
