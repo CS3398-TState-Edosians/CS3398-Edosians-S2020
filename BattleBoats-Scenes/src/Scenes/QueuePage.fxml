@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="QueueController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="QueueStartBtn" layoutX="274.0" layoutY="283.0" mnemonicParsing="false" onAction="#QueueStartTime" prefHeight="33.0" prefWidth="113.0" text="Queue Up" />
+            <Button fx:id="QueueStopBtn" layoutX="250.0" layoutY="283.0" mnemonicParsing="false" onAction="#QueueStopTime" prefHeight="33.0" prefWidth="24.0" text="X" />
+            <Label fx:id="QueueTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="326.0" prefHeight="33.0" prefWidth="136.0" text="0:00">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="BackBtn" layoutX="24.0" layoutY="347.0" mnemonicParsing="false" onAction="#loadMenu" text="Back" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

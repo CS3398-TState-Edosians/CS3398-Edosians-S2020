@@ -1,6 +1,21 @@
 
 out/
 
+<<<<<<< HEAD
+=======
+Battleboats-master-test/src/battleboats/.idea/battleboats.iml
+
+Battleboats-master-test/src/battleboats/.idea/encodings.xml
+
+Battleboats-master-test/src/battleboats/.idea/misc.xml
+
+Battleboats-master-test/src/battleboats/.idea/modules.xml
+
+Battleboats-master-test/src/battleboats/.idea/vcs.xml
+
+Battleboats-master-test/src/battleboats/.idea/workspace.xml
+
+>>>>>>> dev
 BattleBoats-Scenes/.idea/BattleBoats-Scenes.iml
 
 BattleBoats-Scenes/.idea/encodings.xml
@@ -11,4 +26,10 @@ BattleBoats-Scenes/.idea/modules.xml
 
 BattleBoats-Scenes/.idea/vcs.xml
 
+<<<<<<< HEAD
 BattleBoats-Scenes/.idea/workspace.xml
+=======
+BattleBoats-Scenes/src/BattleBoats-Scenes.iml
+
+BattleBoats-Scenes/user_info.txt
+>>>>>>> dev
