@@ -266,7 +266,7 @@ public class Game {
             String phrase = null;
             int phrasenumber;
 
-            phrasenumber = random.nextInt(5);
+            phrasenumber = random.nextInt(7);
             if (isAngry) {
                 switch (phrasenumber) {
                     case 1:
@@ -276,13 +276,19 @@ public class Game {
                         phrase = "Enemy: You are a tough opponent... \n";
                         break;
                     case 3:
-                        phrase = "Enemy: yo win  this time. \n";
+                        phrase = "Enemy: You win  this time. \n";
                         break;
                     case 4:
                         phrase = "Enemy: Impossible! \n";
                         break;
                     case 5:
                         phrase = "Enemy: Failure is unacceptable. \n";
+                        break;
+                    case 6:
+                        phrase = "Enemy: Slick Move, Salior. \n";
+                        break;
+                    case 7:
+                        phrase = "Enemy: Moby Dick!. \n";
                         break;
                 }
             } else {
@@ -301,6 +307,12 @@ public class Game {
                         break;
                     case 5:
                         phrase = "Enemy: I am the battle boat master! \n";
+                        break;
+                    case 6:
+                        phrase = "Enemy: Loser. \n";
+                        break;
+                    case 7:
+                        phrase = "Enemy: Nice try, Not! \n";
                         break;
                 }
             }
