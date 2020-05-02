@@ -137,7 +137,7 @@ public class Game {
                             x--;
                             break;
                     }
-                    if (x > 12 || y > 12) {
+                    if (x >= 12 || y >= 12) {
                         switch (predictionDirection) {
                             case 1:
                                 predictionDirection = 4;
@@ -153,7 +153,7 @@ public class Game {
                                 break;
                         }
                     }
-                } while (x > 12 || y > 12);
+                } while (x >= 12 || y >= 12);
 
 
                 cell = playerBoard.getCell(x, y);
@@ -176,7 +176,7 @@ public class Game {
                             x--;
                             break;
                     }
-                } while (x > 12 || y > 12);
+                } while (x >= 12 || y >= 12);
 
                 cell = playerBoard.getCell(x, y);
                 if (cell.ship != null) {
@@ -246,22 +246,23 @@ public class Game {
                 }
                 if (playerBoard.ships == 0) {
                     displayMessage("YOU LOSE");
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("Scenes/LoseScreen.fxml"));
-                Parent MenuRoot;
-                try {
-                    MenuRoot = loader.load();
-                    Scene MenuPage = new Scene(MenuRoot, 600, 400);
-                    window.setScene(MenuPage);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("Scenes/LoseScreen.fxml"));
+                    Parent MenuRoot;
+                    try {
+                        MenuRoot = loader.load();
+                        Scene MenuPage = new Scene(MenuRoot, 600, 400);
+                        window.setScene(MenuPage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }
 
+        }
     }
 
-        private String phraseGenerator ( boolean isAngry){
+        private String phraseGenerator(boolean isAngry){
 
             String phrase = null;
             int phrasenumber;
@@ -281,7 +282,7 @@ public class Game {
                     case 4:
                         phrase = "Enemy: Impossible! \n";
                         break;
-                    case 5:
+                    case:5
                         phrase = "Enemy: Failure is unacceptable. \n";
                         break;
                     case 6:
