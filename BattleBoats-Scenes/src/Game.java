@@ -124,32 +124,32 @@ public class Game {
                     y = lastSpotted.y;
                     choice = predictionDirection;
                     switch (choice) {
-                        case 1:
+                        case 0:
                             x++;
                             break;
-                        case 2:
+                        case 1:
                             y++;
                             break;
-                        case 3:
+                        case 2:
                             y--;
                             break;
-                        case 4:
+                        case 3:
                             x--;
                             break;
                     }
                     if (x >= 12 || y >= 12) {
                         switch (predictionDirection) {
-                            case 1:
-                                predictionDirection = 4;
-                                break;
-                            case 4:
-                                predictionDirection = 1;
-                                break;
-                            case 2:
+                            case 0:
                                 predictionDirection = 3;
                                 break;
+                            case 1:
+                                predictionDirection = 2;
+                                break;
+                            case 2:
+                                predictionDirection = 1;
+                                break;
                             case 3:
-                                predictionDirection = 4;
+                                predictionDirection = 0;
                                 break;
                         }
                     }
@@ -161,18 +161,18 @@ public class Game {
                 do {
                     x = lastSpotted.x;
                     y = lastSpotted.y;
-                    choice = random.nextInt(4);
+                    choice = random.nextInt(3);
                     switch (choice) {
-                        case 1:
+                        case 0:
                             x++;
                             break;
-                        case 2:
+                        case 1:
                             y++;
                             break;
-                        case 3:
+                        case 2:
                             y--;
                             break;
-                        case 4:
+                        case 3:
                             x--;
                             break;
                     }
@@ -230,17 +230,17 @@ public class Game {
             } else {
                 if (isPredictingDirection) {
                     switch (predictionDirection) {
-                        case 1:
-                            predictionDirection = 4;
-                            break;
-                        case 4:
-                            predictionDirection = 1;
-                            break;
-                        case 2:
+                        case 0:
                             predictionDirection = 3;
                             break;
                         case 3:
-                            predictionDirection = 4;
+                            predictionDirection = 0;
+                            break;
+                        case 1:
+                            predictionDirection = 2;
+                            break;
+                        case 2:
+                            predictionDirection = 1;
                             break;
                     }
                 }
